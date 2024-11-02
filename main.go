@@ -11,12 +11,13 @@ import (
 
 func main() {
 	fmt.Println("Работа с MySql")
-	db, err := sql.Open("mysql", "p63046646198-i0ifp6@gcp-sa-cloud-sql.iam.gserviceaccount.com")
+	db, err := sql.Open("mysql", "root:Decent@1Ljcnjqysq@tcp(34.56.246.79:3306)/forGolangPrj")
 	if err != nil {
 		panic(err)
 	}
 
 	defer db.Close()
+
 	fmt.Println("Connected to MySQL")
 }
 
