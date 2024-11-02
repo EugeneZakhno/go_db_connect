@@ -17,8 +17,15 @@ func main() {
 	}
 
 	defer db.Close()
-
 	fmt.Println("Connected to MySQL")
+	//Установка данных
+	insert, err := db.Query("INSERT INTO users (name, age) VALUES ('Diana',19)")
+	if err != nil {
+		panic(err)
+	}
+	defer insert.Close()
+	fmt.Println("Успешно добавлен пользователь!")
+
 }
 
 //TIP See GoLand help at <a href="https://www.jetbrains.com/help/go/">jetbrains.com/help/go/</a>.
