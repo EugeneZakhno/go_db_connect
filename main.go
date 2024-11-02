@@ -6,8 +6,10 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-//TIP To run your code, right-click the code and select <b>Run</b>. Alternatively, click
-// the <icon src="AllIcons.Actions.Execute"/> icon in the gutter and select the <b>Run</b> menu item from here.
+type User struct {
+	Name string `json:"name"`
+	Age  uint16 `json:"age"`
+}
 
 func main() {
 	fmt.Println("Работа с MySql")
@@ -18,15 +20,27 @@ func main() {
 
 	defer db.Close()
 	fmt.Println("Connected to MySQL")
+
 	//Установка данных
-	insert, err := db.Query("INSERT INTO users (name, age) VALUES ('Diana',19)")
+	/*
+		insert, err := db.Query("INSERT INTO users (name, age) VALUES ('Diana',19)")
+		if err != nil {
+			panic(err)
+		}
+		defer insert.Close()
+		fmt.Println("Успешно добавлен пользователь!")
+	*/
+
+	res, err := db.Query("select name, age from users")
 	if err != nil {
 		panic(err)
 	}
-	defer insert.Close()
-	fmt.Println("Успешно добавлен пользователь!")
-
+	for res.Next() {
+		var user User
+		err = res.Scan(&user.Name, &user.Age)
+		if err != nil {
+			panic(err)
+		}
+		fmt.Print(fmt.Sprintf("User: %s with age: %d", user.Name, user.Age))
+	}
 }
-
-//TIP See GoLand help at <a href="https://www.jetbrains.com/help/go/">jetbrains.com/help/go/</a>.
-// Also, you can try interactive lessons for GoLand by selecting 'Help | Learn IDE Features' from the main menu.
