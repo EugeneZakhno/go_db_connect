@@ -22,15 +22,15 @@ func main() {
 	fmt.Println("Connected to MySQL")
 
 	//Установка данных
-	/*
-		insert, err := db.Query("INSERT INTO users (name, age) VALUES ('Diana',19)")
-		if err != nil {
-			panic(err)
-		}
-		defer insert.Close()
-		fmt.Println("Успешно добавлен пользователь!")
-	*/
 
+	insert, err := db.Query("INSERT INTO users (name, age) VALUES ('Masha',59)")
+	if err != nil {
+		panic(err)
+	}
+	defer insert.Close()
+	fmt.Println("Успешно добавлен пользователь!")
+
+	// Выборка из Базы данных
 	res, err := db.Query("select name, age from users")
 	if err != nil {
 		panic(err)
