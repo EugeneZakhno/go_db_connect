@@ -3,7 +3,7 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	_ "github.com/go-sql-driver/mysql"
+	_ "github.com/lib/pq"
 )
 
 type User struct {
@@ -12,23 +12,23 @@ type User struct {
 }
 
 func main() {
-	fmt.Println("Работа с MySql")
-	db, err := sql.Open("mysql", "root:Decent@1Ljcnjqysq@tcp(34.56.246.79:3306)/forGolangPrj")
+	fmt.Println("Работа с Postgres")
+	db, err := sql.Open("postgres", "postgresql://godbtest_user:UosIYcNeEmC04atz5u3Mo8VzExRvuA6H@dpg-ct841upu0jms73auig7g-a.oregon-postgres.render.com/godbtest")
 	if err != nil {
 		panic(err)
 	}
 
 	defer db.Close()
-	fmt.Println("Connected to MySQL")
+	fmt.Println("Connected to Postgres")
 
 	//Установка данных
-
-	insert, err := db.Query("INSERT INTO users (name, age) VALUES ('Masha',59)")
-	if err != nil {
-		panic(err)
-	}
-	defer insert.Close()
-	fmt.Println("Успешно добавлен пользователь!")
+	/*
+		insert, err := db.Query("INSERT INTO users (name, age) VALUES ('Connection check',01)")
+		if err != nil {
+			panic(err)
+		}
+		defer insert.Close()
+		fmt.Println("Успешно добавлен пользователь!") */
 
 	// Выборка из Базы данных
 	res, err := db.Query("select name, age from users")
