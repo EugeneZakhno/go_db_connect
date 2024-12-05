@@ -21,16 +21,15 @@ func main() {
 	defer db.Close()
 	fmt.Println("Connected to Postgres")
 
-	//Установка данных
-	/*
-		insert, err := db.Query("INSERT INTO users (name, age) VALUES ('Connection check',01)")
-		if err != nil {
-			panic(err)
-		}
-		defer insert.Close()
-		fmt.Println("Успешно добавлен пользователь!") */
+	//Установка данных:
+	insert, err := db.Query("INSERT INTO users (name, age) VALUES ('Nina',59)")
+	if err != nil {
+		panic(err)
+	}
+	defer insert.Close()
+	fmt.Println("Успешно добавлен пользователь!")
 
-	// Выборка из Базы данных
+	// Выборка из Базы данных:
 	res, err := db.Query("select name, age from users")
 	if err != nil {
 		panic(err)
