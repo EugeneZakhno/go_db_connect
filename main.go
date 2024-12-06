@@ -22,7 +22,7 @@ func main() {
 	fmt.Println("Connected to Postgres")
 
 	//Установка данных:
-	insert, err := db.Query("INSERT INTO users (name, age) VALUES ('Nina',59)")
+	insert, err := db.Query("INSERT INTO users (name, age) VALUES ('Vasia',67)")
 	if err != nil {
 		panic(err)
 	}
